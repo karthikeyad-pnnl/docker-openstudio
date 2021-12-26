@@ -9,10 +9,9 @@ ARG DOWNLOAD_PREFIX=""
 # Set the version of OpenStudio when building the container. For example `docker build --build-arg
 # OPENSTUDIO_VERSION=2.6.0 --build-arg OPENSTUDIO_SHA=e3cb91f98a .` in the .travis.yml. Set with the ENV keyword to
 # inherit the variables into child containers
-# Downloaded file-name is OpenStudio-2.9.1.3472e8b799-Linux.deb
-ARG OPENSTUDIO_VERSION = 2.9.1
+ARG OPENSTUDIO_VERSION
 ARG OPENSTUDIO_VERSION_EXT
-ARG OPENSTUDIO_SHA = 3472e8b799
+ARG OPENSTUDIO_SHA
 ARG OS_BUNDLER_VERSION=1.17.1
 ENV OPENSTUDIO_VERSION=$OPENSTUDIO_VERSION
 ENV OPENSTUDIO_VERSION_EXT=$OPENSTUDIO_VERSION_EXT
@@ -90,7 +89,6 @@ ENV RUBYLIB=/usr/local/openstudio-${OPENSTUDIO_VERSION}/Ruby:/usr/Ruby
 ENV ENERGYPLUS_EXE_PATH=/usr/local/openstudio-${OPENSTUDIO_VERSION}/EnergyPlus/energyplus
 
 # The OpenStudio Gemfile contains a fixed bundler version, so you have to install and run specific to that version
-# Needs to also run "gem install docile -v 1.3.5"
 RUN gem install bundler -v $OS_BUNDLER_VERSION && \
     mkdir /var/oscli && \
     cp /usr/local/openstudio-${OPENSTUDIO_VERSION}/Ruby/Gemfile /var/oscli/ && \
